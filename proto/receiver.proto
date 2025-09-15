@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package receiver;
+
+option go_package = "./proto";
+
+// Receiver 서비스 정의
+service Receiver {
+  // 양방향 스트림 연결
+  rpc Connect(stream Message) returns (stream Message);
+}
+
+// 메시지 정의
+message Message {
+  string agent_id = 1;
+  string message_type = 2;
+  string content = 3;
+  int64 timestamp = 4;
+}
+
+// 명령 메시지
+message Command {
+  string command_id = 1;
+  string command_type = 2;
+  string target_agent_id = 3;
+  string parameters = 4;
+}
